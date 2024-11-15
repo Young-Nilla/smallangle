@@ -4,18 +4,20 @@ from numpy import pi
 import pandas as pd
 
 
+# Create a Click group to organize related commands
 @click.group()
-def cmd_group():
+def smallangle():
     pass
 
-@cmd_group.command("sin")
+# Define the 'sin' command
+@smallangle.command("sin")
 @click.option(
     "-n",
     "--number",
-    default=1,
+    default=5, # Default value for the number of points
     help="The number of points to calculate within the range [0, 2π].",
-    show_default=True,  # show default in help
-    type = int
+    show_default=True, # show default in help
+    type = int # Ensure the input is an interger
 )
 def sin(number):
     """
@@ -26,14 +28,15 @@ def sin(number):
     df = pd.DataFrame({"x": x, "sin (x)": np.sin(x)})
     print(df)
 
-@cmd_group.command("tan")
+# Define the 'tan' command
+@smallangle.command("tan")
 @click.option(
     "-n",
     "--number",
-    default=1,
+    default=5, # Default value for the number of points
     help="The number of points to calculate within the range [0, 2π].",
     show_default=True,  # show default in help
-    type = int
+    type = int # Ensure the input is an interger
 )
 def tan(number):
     """
@@ -44,6 +47,6 @@ def tan(number):
     df = pd.DataFrame({"x": x, "tan (x)": np.tan(x)})
     print(df)
 
-
+# Entry point for the script
 if __name__ == "__main__":
-    sin(10)
+    smallangle()
